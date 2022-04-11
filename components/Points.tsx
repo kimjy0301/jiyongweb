@@ -26,14 +26,14 @@ const Points = (props: GroupProps) => {
     ref.current.instanceMatrix.needsUpdate = true;
   }, []);
 
+  let mat4: Matrix4 = new Matrix4();
+  let prePosition = new Vector3();
   useFrame(({ clock }) => {
     let surfacePositions = useStore.getState().surfacePositions;
     let twinkleMove = useStore.getState().twinkleMove;
 
     let counter = 0;
     const t = clock.oldTime * 0.001;
-    let mat4: Matrix4 = new Matrix4();
-    let prePosition = new Vector3();
     if (twinkleMove) {
       for (let x = 0; x < instanceCount; x++) {
         ref.current.getMatrixAt(x, mat4);
