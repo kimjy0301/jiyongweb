@@ -131,7 +131,6 @@ const ThreeCanvas = () => {
       tempPositions.push(tempPosition.clone());
     }
     setSurfacePositions(tempPositions);
-    console.log(surfacePositions);
   };
   const onClickCreate2 = () => {
     const geometry = new CylinderGeometry(10, 10, 10);
@@ -151,7 +150,6 @@ const ThreeCanvas = () => {
       tempPositions.push(tempPosition.clone());
     }
     setSurfacePositions(tempPositions);
-    console.log(surfacePositions);
   };
 
   const onClickCreate3 = () => {
@@ -177,7 +175,6 @@ const ThreeCanvas = () => {
         tempPositions.push(tempPosition.clone());
       }
       setSurfacePositions(tempPositions);
-      console.log(surfacePositions);
     });
   };
 
