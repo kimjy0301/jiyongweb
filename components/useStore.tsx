@@ -12,6 +12,10 @@ interface useStoreInterface {
 
   surfacePositions: Vector3[];
   setSurfacePositions: (param: Vector3[]) => void;
+
+  twinkleMove: boolean;
+
+  setTwinkleMove: (param: boolean) => void;
 }
 
 export const useStore = create<useStoreInterface>((set) => ({
@@ -37,4 +41,7 @@ export const useStore = create<useStoreInterface>((set) => ({
 
   surfacePositions: [],
   setSurfacePositions: (param) => set((state) => ({ surfacePositions: param })),
+
+  twinkleMove: true,
+  setTwinkleMove: (param) => set((state) => ({ twinkleMove: param })),
 }));

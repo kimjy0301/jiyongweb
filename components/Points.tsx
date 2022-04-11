@@ -1,7 +1,6 @@
 import { GroupProps, useFrame } from "@react-three/fiber";
-import gsap from "gsap";
 import { useEffect, useRef } from "react";
-import { InstancedMesh, MathUtils, Matrix4, Object3D, Vector3 } from "three";
+import { InstancedMesh, Matrix4, Object3D, Vector3 } from "three";
 import { useStore } from "./useStore";
 
 const tempSphereList = [];
@@ -10,6 +9,7 @@ const instanceCount = 10000;
 const Points = (props: GroupProps) => {
   const ref = useRef<InstancedMesh>(null);
 
+  const setTwinkleMove = useStore((state) => state.setTwinkleMove);
   useEffect(() => {
     console.log(ref.current);
     let surfacePositions = useStore.getState().surfacePositions;
@@ -28,57 +28,63 @@ const Points = (props: GroupProps) => {
 
   useFrame(({ clock }) => {
     let surfacePositions = useStore.getState().surfacePositions;
+    let twinkleMove = useStore.getState().twinkleMove;
 
     let counter = 0;
     const t = clock.oldTime * 0.001;
     let mat4: Matrix4 = new Matrix4();
     let prePosition = new Vector3();
-    for (let x = 0; x < instanceCount; x++) {
-      ref.current.getMatrixAt(x, mat4);
-      const id = counter++;
-      // let previousPosition = tempSphereList[x].position;
-      prePosition.setFromMatrixPosition(mat4);
-      let nextPosition = surfacePositions[x];
-      if (!prePosition.equals(nextPosition)) {
-        // tempSphereList[x].position.lerp(surfacePositions[x], 0.1);
+    if (twinkleMove) {
+      for (let x = 0; x < instanceCount; x++) {
+        ref.current.getMatrixAt(x, mat4);
+        const id = counter++;
+        // let previousPosition = tempSphereList[x].position;
+        prePosition.setFromMatrixPosition(mat4);
+        let nextPosition = surfacePositions[x];
+        if (prePosition.distanceTo(nextPosition) > 0.001) {
+          // tempSphereList[x].position.lerp(surfacePositions[x], 0.1);
 
-        //tempSphereList[x].position.lerp(surfacePositions[x], 0.1);
+          //tempSphereList[x].position.lerp(surfacePositions[x], 0.1);
 
-        prePosition.lerp(surfacePositions[x], 0.04);
-        prePosition.y = prePosition.y + Math.sin(Math.random() / 100);
-        prePosition.x = prePosition.x + Math.sin(Math.random() / 100);
-        prePosition.z = prePosition.z + Math.sin(Math.random() / 100);
+          prePosition.lerp(surfacePositions[x], 0.04);
+          prePosition.y = prePosition.y + Math.sin(Math.random() / 100);
+          prePosition.x = prePosition.x + Math.sin(Math.random() / 100);
+          prePosition.z = prePosition.z + Math.sin(Math.random() / 100);
 
-        // tempSphere.position.x = MathUtils.lerp(
-        //   previousPosition.x,
-        //   nextPosition.x,
-        //   0.1
-        // );
-        // tempSphere.position.y = MathUtils.lerp(
-        //   previousPosition.y,
-        //   nextPosition.y,
-        //   0.1
-        // );
-        // tempSphere.position.z = MathUtils.lerp(
-        //   previousPosition.z,
-        //   nextPosition.z,
-        //   0.1
-        // );
-        // tempSphereList[x].position.set(
-        //   surfacePositions[x].x,
-        //   surfacePositions[x].y,
-        //   surfacePositions[x].z
-        // );
-        // tempSphere.position.set(
-        //   surfacePositions[x].x,
-        //   surfacePositions[x].y,
-        //   surfacePositions[x].z
-        // );
+          // tempSphere.position.x = MathUtils.lerp(
+          //   previousPosition.x,
+          //   nextPosition.x,
+          //   0.1
+          // );
+          // tempSphere.position.y = MathUtils.lerp(
+          //   previousPosition.y,
+          //   nextPosition.y,
+          //   0.1
+          // );
+          // tempSphere.position.z = MathUtils.lerp(
+          //   previousPosition.z,
+          //   nextPosition.z,
+          //   0.1
+          // );
+          // tempSphereList[x].position.set(
+          //   surfacePositions[x].x,
+          //   surfacePositions[x].y,
+          //   surfacePositions[x].z
+          // );
+          // tempSphere.position.set(
+          //   surfacePositions[x].x,
+          //   surfacePositions[x].y,
+          //   surfacePositions[x].z
+          // );
 
-        // tempSphereList[x].updateMatrix();
+          // tempSphereList[x].updateMatrix();
 
-        mat4.setPosition(prePosition);
-        ref.current.setMatrixAt(id, mat4);
+          mat4.setPosition(prePosition);
+          ref.current.setMatrixAt(id, mat4);
+        } else {
+          console.log(prePosition.distanceTo(nextPosition));
+          setTwinkleMove(false);
+        }
       }
 
       // ref.current.position.x = tempSphere.rotation.y = t;

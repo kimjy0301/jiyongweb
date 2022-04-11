@@ -94,6 +94,7 @@ const ThreeCanvas = () => {
 
   const surfacePositions = useStore((state) => state.surfacePositions);
   const setSurfacePositions = useStore((state) => state.setSurfacePositions);
+  const setTwinkleMove = useStore((state) => state.setTwinkleMove);
 
   useEffect(() => {
     const tempPositions = [];
@@ -131,6 +132,7 @@ const ThreeCanvas = () => {
       tempPositions.push(tempPosition.clone());
     }
     setSurfacePositions(tempPositions);
+    setTwinkleMove(true);
   };
   const onClickCreate2 = () => {
     const geometry = new CylinderGeometry(10, 10, 10);
@@ -150,6 +152,7 @@ const ThreeCanvas = () => {
       tempPositions.push(tempPosition.clone());
     }
     setSurfacePositions(tempPositions);
+    setTwinkleMove(true);
   };
 
   const onClickCreate3 = () => {
@@ -175,6 +178,7 @@ const ThreeCanvas = () => {
         tempPositions.push(tempPosition.clone());
       }
       setSurfacePositions(tempPositions);
+      setTwinkleMove(true);
     });
   };
 
