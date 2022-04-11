@@ -158,7 +158,6 @@ const ThreeCanvas = () => {
   const onClickCreate3 = () => {
     let elephant: Mesh = null;
     new OBJLoader().load("/objs/Mesh_Elephant.obj", (obj) => {
-      console.log("onload");
       elephant = obj.children[0];
       elephant.geometry.scale(0.1, 0.1, 0.1);
       elephant.material = new MeshBasicMaterial({
