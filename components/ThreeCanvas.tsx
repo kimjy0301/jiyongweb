@@ -4,6 +4,7 @@ import {
   Html,
   OrbitControls,
   Sampler,
+  Stats,
   TransformFn,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -202,7 +203,7 @@ const ThreeCanvas = () => {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       {/* <TwinklePoint position={[0, 0, 0]} scale={0.5}></TwinklePoint> */}
-
+      <Stats showPanel={0} className="stats" />
       <Points></Points>
       <Html fullscreen>
         <div className="w-screen h-screen absolute left-0 top-0">
@@ -218,7 +219,7 @@ const ThreeCanvas = () => {
           >
             -
           </div> */}
-          <div className="m-2">
+          <div className="m-2 mt-20">
             {/* <input type={"text"}></input> */}
             <div
               onClick={onClickCreate}

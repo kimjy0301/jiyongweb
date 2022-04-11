@@ -46,11 +46,11 @@ const Points = (props: GroupProps) => {
 
           //tempSphereList[x].position.lerp(surfacePositions[x], 0.1);
 
-          prePosition.lerp(surfacePositions[x], 0.08);
           prePosition.y = prePosition.y + Math.sin(Math.random() / 100);
           prePosition.x = prePosition.x + Math.sin(Math.random() / 100);
           prePosition.z = prePosition.z + Math.sin(Math.random() / 100);
 
+          prePosition.lerp(surfacePositions[x], 0.08);
           // tempSphere.position.x = MathUtils.lerp(
           //   previousPosition.x,
           //   nextPosition.x,
