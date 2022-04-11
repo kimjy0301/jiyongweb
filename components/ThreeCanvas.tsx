@@ -182,6 +182,58 @@ const ThreeCanvas = () => {
     });
   };
 
+  const onClickCreate4 = () => {
+    let elephant: Mesh = null;
+    new OBJLoader().load("/objs/airplane.obj", (obj) => {
+      elephant = obj.children[0];
+      elephant.geometry.scale(4, 4, 4);
+      elephant.geometry.rotateY(Math.PI);
+      elephant.material = new MeshBasicMaterial({
+        wireframe: true,
+        color: 0x000000,
+        transparent: true,
+        opacity: 1,
+      });
+
+      const sampler = new MeshSurfaceSampler(elephant).build();
+
+      const tempPositions = [];
+      const tempPosition = new Vector3();
+
+      for (let i = 0; i < instanceCount; i++) {
+        sampler.sample(tempPosition);
+        tempPositions.push(tempPosition.clone());
+      }
+      setSurfacePositions(tempPositions);
+      setTwinkleMove(true);
+    });
+  };
+
+  const onClickCreate5 = () => {
+    let elephant: Mesh = null;
+    new OBJLoader().load("/objs/piano.obj", (obj) => {
+      elephant = obj.children[0];
+      elephant.geometry.scale(8, 8, 8);
+      elephant.material = new MeshBasicMaterial({
+        wireframe: true,
+        color: 0x000000,
+        transparent: true,
+        opacity: 1,
+      });
+
+      const sampler = new MeshSurfaceSampler(elephant).build();
+
+      const tempPositions = [];
+      const tempPosition = new Vector3();
+
+      for (let i = 0; i < instanceCount; i++) {
+        sampler.sample(tempPosition);
+        tempPositions.push(tempPosition.clone());
+      }
+      setSurfacePositions(tempPositions);
+      setTwinkleMove(true);
+    });
+  };
   return (
     <Canvas
       style={{ width: "100%", height: "100%" }}
@@ -209,35 +261,47 @@ const ThreeCanvas = () => {
         <div className="w-screen h-screen absolute left-0 top-0">
           {/* <div
             onClick={increaseTwinklePositionX}
-            className="bg-white p-3 rounded cursor-pointer w-10 inline-block mx-3"
+            className="bg-white p-3 rounded cursor-pointer w-10 m-3"
           >
             +
           </div>
           <div
             onClick={decreaseTwinklePositionX}
-            className="bg-white p-3 rounded cursor-pointer w-10 inline-block mx-3"
+            className="bg-white p-3 rounded cursor-pointer w-10 m-3"
           >
             -
           </div> */}
-          <div className="m-2 mt-20">
+          <div className="relative m-2 mt-20 flex flex-col">
             {/* <input type={"text"}></input> */}
             <div
               onClick={onClickCreate}
-              className="bg-white p-3 rounded cursor-pointer w-18 inline-block mx-3"
+              className="bg-white p-3 rounded cursor-pointer lg:text-base text-xs w-16 mt-1 lg:w-20 lg:m-3"
             >
               Box
-            </div>{" "}
+            </div>
             <div
               onClick={onClickCreate2}
-              className="bg-white p-3 rounded cursor-pointer w-18 inline-block mx-3"
+              className="bg-white p-3 rounded cursor-pointer lg:text-base text-xs w-16 mt-1 lg:w-20 lg:m-3"
             >
               Cylinder
             </div>
             <div
               onClick={onClickCreate3}
-              className="bg-white p-3 rounded cursor-pointer w-18 inline-block mx-3"
+              className="bg-white p-3 rounded cursor-pointer lg:text-base text-xs w-16 mt-1 lg:w-20 lg:m-3"
             >
               Elephant
+            </div>
+            <div
+              onClick={onClickCreate4}
+              className="bg-white p-3 rounded cursor-pointer lg:text-base text-xs w-16 mt-1 lg:w-20 lg:m-3"
+            >
+              Airplane
+            </div>
+            <div
+              onClick={onClickCreate5}
+              className="bg-white p-3 rounded cursor-pointer lg:text-base text-xs w-16 mt-1 lg:w-20 lg:m-3"
+            >
+              Piano
             </div>
           </div>
         </div>
