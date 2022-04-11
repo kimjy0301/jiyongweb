@@ -214,6 +214,7 @@ const ThreeCanvas = () => {
     new OBJLoader().load("/objs/piano.obj", (obj) => {
       elephant = obj.children[0];
       elephant.geometry.scale(8, 8, 8);
+      elephant.geometry.rotateY(-Math.PI / 2);
       elephant.material = new MeshBasicMaterial({
         wireframe: true,
         color: 0x000000,
