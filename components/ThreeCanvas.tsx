@@ -261,7 +261,6 @@ const ThreeCanvas = () => {
       <OrbitControls></OrbitControls>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <Environment preset="sunset" background />
       {/* <TwinklePoint position={[0, 0, 0]} scale={0.5}></TwinklePoint> */}
       <Stats showPanel={0} className="stats" />
       {/* <Points></Points> */}
