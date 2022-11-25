@@ -1,4 +1,5 @@
 import {
+  Environment,
   GizmoHelper,
   GizmoViewport,
   Html,
@@ -21,7 +22,11 @@ import { MeshSurfaceSampler } from "../node_modules/three/examples/jsm/math/Mesh
 import { OBJLoader } from "../node_modules/three/examples/jsm/loaders/OBJLoader";
 import Points from "./Points";
 import TwinklePoint from "./TwinklePoint";
+import { useLoader } from "@react-three/fiber";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+
 import { useStore } from "./useStore";
+import Tree from "./Tree";
 
 const Cube = (props: JSX.IntrinsicElements["mesh"]) => {
   const instances = useRef();
@@ -235,11 +240,12 @@ const ThreeCanvas = () => {
       setTwinkleMove(true);
     });
   };
+
   return (
     <Canvas
       style={{ width: "100%", height: "100%" }}
       camera={{
-        position: [13, 13, 13],
+        position: [10, 10, 10],
         fov: 100,
       }}
     >
@@ -255,10 +261,13 @@ const ThreeCanvas = () => {
       <OrbitControls></OrbitControls>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
+      <Environment preset="sunset" background />
       {/* <TwinklePoint position={[0, 0, 0]} scale={0.5}></TwinklePoint> */}
       <Stats showPanel={0} className="stats" />
-      <Points></Points>
-      <Html fullscreen>
+      {/* <Points></Points> */}
+      <Tree></Tree>
+
+      {/* <Html fullscreen>
         <div className="w-screen h-screen absolute left-0 top-0">
           {/* <div
             onClick={increaseTwinklePositionX}
@@ -271,9 +280,9 @@ const ThreeCanvas = () => {
             className="bg-white p-3 rounded cursor-pointer w-10 m-3"
           >
             -
-          </div> */}
+          </div> 
           <div className="relative m-2 mt-20 flex flex-col">
-            {/* <input type={"text"}></input> */}
+            {/* <input type={"text"}></input> 
             <div
               onClick={onClickCreate}
               className="bg-white p-3 rounded cursor-pointer lg:text-base text-xs w-16 mt-1 lg:w-20 lg:m-3"
@@ -306,7 +315,7 @@ const ThreeCanvas = () => {
             </div>
           </div>
         </div>
-      </Html>
+      </Html> */}
     </Canvas>
   );
 };
